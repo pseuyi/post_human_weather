@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel='clouds' href='/favicon.ico' type='image/x-icon'/ >
+
+    <script src="http://www.webglearth.com/v2/api.js"></script>
+    <script>
+      var earth;
+      function initialize() {
+        earth = new WE.map('earth_div');
+        earth.setView([46.8011, 8.2266], 6);
+        WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+          attribution: '© OpenStreetMap contributors'
+        }).addTo(earth);
+
+        // Start a simple rotation animation
+        var before = null;
+        requestAnimationFrame(function animate(now) {
+            var c = earth.getPosition();
+            var elapsed = before? now - before: 0;
+            before = now;
+            earth.setCenter([c[0], c[1] - 0.1*(elapsed/360)]);
+            requestAnimationFrame(animate);
+        });
+      }
+    </script>
+    <title>human weather</title>
+<!--     <audio controls autoplay loop>
+      <source src='/audio/final-exam.mp3' type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio> -->
+  </head>
+
+  <body onload="initialize()">
+    <div id='main'></div>
+    <div id="earth_div"></div>
+  </body>
+
+</html>
