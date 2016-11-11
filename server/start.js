@@ -20,6 +20,10 @@ if (!pkg.isProduction) {
 }  
 
 module.exports = app
+  // for bypassing restriction for map tiles
+  // .use(function(req, res) {
+  //     res.header("Access-Control-Allow-Origin", "*");
+  // })
   // We'll store the whole session in a cookie
   .use(require('cookie-session') ({
     name: 'session',
@@ -39,6 +43,9 @@ module.exports = app
 
   // Serve our api
   .use('/api', require('./api'))
+
+  // Serve pages
+  .use('/routes', require('./routes'))
 
   // Send index.html for anything else.
   .get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html')))

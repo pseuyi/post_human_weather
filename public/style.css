@@ -1,12 +1,190 @@
+.marquee {
+  position: fixed;
+  width: 100%;
+  line-height: 3em;
+  font-size: 3em;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  z-index: -1;
+  font-family: 'times new roman';
+}
+.marquee p {
+  margin-top: 15em;
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 60s linear infinite;
+}
+.marquee1 p {
+  margin-top: 3em;
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 63s linear infinite;
+}
+.marquee2 p {
+  margin-top: 6em;
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 61s linear infinite;
+}
+.marquee3 p {
+  margin-top: 9em;
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 66s linear infinite;
+}
+.marquee4 p {
+  margin-top: 12em;
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 65s linear infinite;
+}
+@keyframes marquee {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+@keyframes marquee1 {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+@keyframes marquee2 {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+@keyframes marquee3 {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+@keyframes marquee4 {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+
+
 body {
 	background-color: black;
+	font-family: 'consolas', 'monaco', fixed-width;
+  padding-top: 100px
+}
+
+#app {
+	color: white;
+	overflow: scroll;
+	/*width: 200px;*/
 }
 
 #earth_div {
 	top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;
-	z-index: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 5;
 }
 
 audio {
 	display: none;
 }
+
+h1 {
+	font-size: 10em;
+}
+
+.top-container {
+  color: red;
+  font-size: 4em;
+	background: transparent;
+	position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 1% 0;
+  margin-bottom: 2px;
+  text-align: center;
+  display: block;
+}
+.top-input {
+  color: white;
+  font-size: 4em;
+  background: transparent;
+  display: block;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 1% 0;
+  margin-bottom: 2px;
+  text-align: center;
+}
+
+.lower-right-input {
+  position: absolute;
+  right: 0.5%;
+  top: 75%;
+  width: 10%;
+  background: red;
+  color: white;
+  padding: 1% 0;
+  margin-bottom: 2px;
+  text-align: center;
+  z-index: 50;
+  
+}
+.bottom-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+.left-bar {
+  margin-right: 1px;
+  margin-top: 2px;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  cursor: pointer;
+  position: static;
+  float: left;
+}
+.right-bar {
+  margin-top: 2px;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  cursor: pointer;
+  position: static;
+  float: right;
+}
+.half-bar {
+	background: #822de2;
+  color: white;
+  width: calc(50% - 1px);
+  font-size: 1em;
+  padding: 1% 0;
+}
+.half-bar:hover{
+  background: transparent;
+}
+.full-bar {
+	background: black;
+  color: white;
+  width: 100%;
+  font-size: 1em;
+  text-align: center;
+  padding: 1% 0;
+  margin-top: 2px;
+  display: inline-block;
+}
+.full-bar:hover {
+  background: red;
+}
+
+
+
+
+
+
+
+
+
+
+

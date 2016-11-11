@@ -2,39 +2,43 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel='clouds' href='/favicon.ico' type='image/x-icon'/ >
+    <link rel='clouds' href='favicon.ico' type='image/x-icon'/ >
 
     <script src="http://www.webglearth.com/v2/api.js"></script>
-    <script>
+    <script id='globe' data-position=''>
       var earth;
       function initialize() {
-        earth = new WE.map('earth_div');
-        earth.setView([46.8011, 8.2266], 6);
-        WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-          attribution: '© OpenStreetMap contributors'
+        earth = new WE.map('my_earth');
+        earth.setView([46.8011, 8.2266], 3);
+        WE.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{
+          attribution: '© u later'
         }).addTo(earth);
+
+        var marker = WE.marker([51.5, -0.09]).addTo(earth);
+        marker.bindPopup("<b>Hello world!</b><br>I am a popup.<br /><span style='font-size:10px;color:#999'>Tip: Another popup is hidden in Cairo..</span>", {maxWidth: 100, closeButton: true}).openPopup();
 
         // Start a simple rotation animation
         var before = null;
         requestAnimationFrame(function animate(now) {
             var c = earth.getPosition();
+            document.getElementById('globe-pos').innerHTML = c || 0;
             var elapsed = before? now - before: 0;
             before = now;
             earth.setCenter([c[0], c[1] - 0.1*(elapsed/360)]);
             requestAnimationFrame(animate);
         });
+        
       }
     </script>
     <title>human weather</title>
-<!--     <audio controls autoplay loop>
-      <source src='/audio/final-exam.mp3' type="audio/mp3">
-      Your browser does not support the audio element.
-    </audio> -->
+
   </head>
 
   <body onload="initialize()">
-    <div id='main'></div>
-    <div id="earth_div"></div>
+    <div id='app'></div>
+    <div id="my_earth"></div>
+
+    <script async defer src=/bundle.js></script> 
   </body>
 
 </html>

@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux'
 
-const initialState = {}
+const initialState = {
+	position: document.getElementById('globe').getAttribute('data-position'),
+	playing: ''
+}
 
 const rootReducer = function(state = initialState, action) {
   switch(action.type) {
