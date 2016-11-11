@@ -5,5 +5,6 @@
 // to get access to the User model.
 
 const User = require('./user')
+const Marker = require('./marker')
 
 module.exports = {User}

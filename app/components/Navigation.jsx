@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Post from './Post'
+import Sadie from './Sadie'
 
 export default class Navigation extends Component {
   constructor (props) {
     super(props);
     this.state={
-      canPost: false
+      canPost: false,
+      forecast: false
     };
-    this.showPost=this.showPost.bind(this);
+    this.togglePost=this.togglePost.bind(this);
+    this.toggleForecast=this.toggleForecast.bind(this);
   }
 
-  showPost () {
-    this.setState({canPost: true})
-  }
+  togglePost () {
+    this.setState({canPost: !this.state.canPost})
+  } 
+  toggleForecast () {
+    this.setState({forecast: !this.state.forecast})
+  }   
 
   render() {
     return (
@@ -24,15 +30,18 @@ export default class Navigation extends Component {
         <input className='lower-right-input' placeholder='2016'></input>
 
         <div className='bottom-container'>
-          <div className='left-bar half-bar'>
-            <h5>left bar buttom</h5>
+          <div className='left-bar half-bar big-button' onClick={this.toggleForecast}>
+            <h2>forecast</h2>
           </div>
-          <div className='right-bar half-bar' onClick={this.showPost}>
-            <h5>right bar button</h5>
+          <div className='right-bar half-bar big-button' onClick={this.togglePost}>
+            <h2>would you like to report on current conditions</h2>
           </div>
+
           {this.state.canPost? <Post /> : null}
-          <div className='full-bar'>
-            <h3>fullbar</h3>
+          {this.state.forecast? <Sadie /> : null}
+
+          <div className='full-bar big-button'>
+            <h3>about this project</h3>
           </div>
         </div>
 

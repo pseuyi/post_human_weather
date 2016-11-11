@@ -45,7 +45,7 @@ module.exports = app
   .use('/api', require('./api'))
 
   // Serve pages
-  .use('/routes', require('./routes'))
+  .use('/turn', require('./routes'))
 
   // Send index.html for anything else.
   .get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html')))

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 export default class Sadie extends Component {
 
   render() {
+    console.log('rendering sadie now...')
     return (
       <div>
         <div className='marquee'>

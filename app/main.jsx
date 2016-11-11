@@ -16,12 +16,12 @@ export const initialize = window.initialize.bind(window);
 export const createMarker = window.createMarker.bind(window);
 
 const AppContainer = connect(
-  null,
+  ({markers})=>({markers: markers}),
   null
 ) (
-  (initialize, createMarker) => 
+  ( markers, initialize, createMarker) => 
   	<div>
-    	<Main createMarker={window.createMarker.bind(window)}  />
+    	<Main markers={markers} createMarker={window.createMarker.bind(window)}  />
     </div>
 	)
 
