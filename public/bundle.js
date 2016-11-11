@@ -46,6 +46,11 @@
 
 	'use strict';
 	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.createMarker = exports.initialize = undefined;
+	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -73,8 +78,8 @@
 	console.log('can i get the init func?', window.initialize); //yes
 	console.log('can i get the createMarker func?', window.createMarker);
 	
-	var initialize = window.initialize.bind(window);
-	var createMarker = window.createMarker.bind(window);
+	var initialize = exports.initialize = window.initialize.bind(window);
+	var createMarker = exports.createMarker = window.createMarker.bind(window);
 	
 	var AppContainer = (0, _reactRedux.connect)(null, null)(function (initialize, createMarker) {
 	  return _react2.default.createElement(
@@ -29025,7 +29030,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Navigation = undefined;
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -29035,6 +29039,10 @@
 	
 	var _reactRedux = __webpack_require__(172);
 	
+	var _Post = __webpack_require__(269);
+	
+	var _Post2 = _interopRequireDefault(_Post);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29043,19 +29051,25 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var Navigation = exports.Navigation = function (_Component) {
+	var Navigation = function (_Component) {
 	  _inherits(Navigation, _Component);
 	
-	  function Navigation() {
+	  function Navigation(props) {
 	    _classCallCheck(this, Navigation);
 	
-	    return _possibleConstructorReturn(this, (Navigation.__proto__ || Object.getPrototypeOf(Navigation)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Navigation.__proto__ || Object.getPrototypeOf(Navigation)).call(this, props));
+	
+	    _this.state = {
+	      canPost: false
+	    };
+	    _this.showPost = _this.showPost.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(Navigation, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      // console.log('what is pos', this.refs.hello.dataset)
+	    key: 'showPost',
+	    value: function showPost() {
+	      this.setState({ canPost: true });
 	    }
 	  }, {
 	    key: 'render',
@@ -29080,13 +29094,14 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'right-bar half-bar' },
+	            { className: 'right-bar half-bar', onClick: this.showPost },
 	            _react2.default.createElement(
 	              'h5',
 	              null,
 	              'right bar button'
 	            )
 	          ),
+	          this.state.canPost ? _react2.default.createElement(_Post2.default, null) : null,
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'full-bar' },
@@ -29100,9 +29115,11 @@
 	      );
 	    }
 	  }]);
-
+	
 	  return Navigation;
 	}(_react.Component);
+	
+	exports.default = Navigation;
 
 /***/ },
 /* 266 */,
@@ -29203,6 +29220,90 @@
 	}(_react.Component);
 	
 	exports.default = Sadie;
+
+/***/ },
+/* 269 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _post = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"APP/app/actions/post\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Post = function (_Component) {
+	  _inherits(Post, _Component);
+	
+	  function Post() {
+	    _classCallCheck(this, Post);
+	
+	    var _this = _possibleConstructorReturn(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this));
+	
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(Post, [{
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      e.preventDefault();
+	      var pack = [e.target.coords.value, e.target.msg.value];
+	      (0, _post.postToMap)(user);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'HI I AM DIV'
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.handleSubmit },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement('input', { type: 'text', placeholder: 'where', name: 'coords' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement('input', { type: 'text', placeholder: 'how is it there', name: 'msg' })
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'submit', value: 'report' },
+	            'report'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Post;
+	}(_react.Component);
+	
+	exports.default = Post;
 
 /***/ }
 /******/ ]);

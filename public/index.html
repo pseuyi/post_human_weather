@@ -25,7 +25,7 @@
         var before = null;
         requestAnimationFrame(function animate(now) {
             var c = earth.getPosition();
-            document.getElementById('globe-pos').innerHTML = c || 0;
+            // document.getElementById('globe-pos').innerHTML = c || 0;
             var elapsed = before? now - before: 0;
             before = now;
             earth.setCenter([c[0], c[1] - 0.1*(elapsed/360)]);

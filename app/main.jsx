@@ -12,8 +12,8 @@ console.log('is this the earth thing?', window.earth) //yes
 console.log('can i get the init func?', window.initialize) //yes
 console.log('can i get the createMarker func?', window.createMarker)
 
-const initialize = window.initialize.bind(window);
-const createMarker = window.createMarker.bind(window);
+export const initialize = window.initialize.bind(window);
+export const createMarker = window.createMarker.bind(window);
 
 const AppContainer = connect(
   null,
