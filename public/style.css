@@ -60,11 +60,10 @@
     100% { transform: translate(-100%, 0); }
 }
 
-
 body {
 	background-color: black;
 	font-family: 'consolas', 'monaco', fixed-width;
-  padding-top: 100px
+  padding-top: 100px;
 }
 
 #app {

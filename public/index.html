@@ -5,17 +5,21 @@
     <link rel='clouds' href='favicon.ico' type='image/x-icon'/ >
 
     <script src="http://www.webglearth.com/v2/api.js"></script>
-    <script id='globe' data-position=''>
-      var earth;
+    <script id='globe'>
+
+      var earth='hi im earth';
+
+      function createMarker(location, message) {
+        var marker = WE.marker(location).addTo(earth);
+        marker.bindPopup(message, {maxWidth: 100, closeButton: true}).openPopup();
+      }
+
       function initialize() {
         earth = new WE.map('my_earth');
         earth.setView([46.8011, 8.2266], 3);
         WE.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{
           attribution: '© u later'
         }).addTo(earth);
-
-        var marker = WE.marker([51.5, -0.09]).addTo(earth);
-        marker.bindPopup("<b>Hello world!</b><br>I am a popup.<br /><span style='font-size:10px;color:#999'>Tip: Another popup is hidden in Cairo..</span>", {maxWidth: 100, closeButton: true}).openPopup();
 
         // Start a simple rotation animation
         var before = null;
@@ -34,7 +38,7 @@
 
   </head>
 
-  <body onload="initialize()">
+  <body>
     <div id='app'></div>
     <div id="my_earth"></div>
 
