@@ -7,7 +7,7 @@ human weather is an atmospheric s.p.a. that allows anonymous users to post emoji
 ###inside
 
 you can:
-* explore the moon
-* look at forecast
+* explore moon shades
+* look at forecasts
 * post to the earth
-* explore earth
+* explore earthly feels
