@@ -29041,8 +29041,9 @@
 	        _react2.default.createElement(_Navigation2.default, null),
 	        this.props.children,
 	        markers && markers.map(function (marker) {
-	          map(marker[0], marker[1]);
-	        })
+	          map(marker[0], marker[1], '/image/sun.png');
+	        }),
+	        _react2.default.createElement(_reactAudioPlayer2.default, { src: '/audio/final-exam.mp3', autoPlay: true })
 	      );
 	    }
 	  }]);
@@ -29050,10 +29051,10 @@
 	  return Main;
 	}(_react.Component);
 	
-	// <ReactAudioPlayer
-	//   src="/audio/final-exam.mp3"
-	//   autoPlay
-	// />
+	//  <ReactAudioPlayer
+	//  src="/audio/final-exam.mp3"
+	//autoPlay
+	///>
 	
 	
 	exports.default = Main;
@@ -29125,6 +29126,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        this.state.forecast ? _react2.default.createElement(_Sadie2.default, null) : null,
 	        _react2.default.createElement('div', { type: 'text', id: 'globe-pos', 'data-position': '', className: 'top-container', ref: 'hello', value: '' }),
 	        _react2.default.createElement('input', { className: 'top-input' }),
 	        _react2.default.createElement('input', { className: 'lower-right-input', placeholder: '2016' }),
@@ -29135,7 +29137,7 @@
 	            'div',
 	            { className: 'left-bar half-bar big-button', onClick: this.toggleForecast },
 	            _react2.default.createElement(
-	              'h2',
+	              'h5',
 	              null,
 	              'forecast'
 	            )
@@ -29144,18 +29146,17 @@
 	            'div',
 	            { className: 'right-bar half-bar big-button', onClick: this.togglePost },
 	            _react2.default.createElement(
-	              'h2',
+	              'h5',
 	              null,
 	              'would you like to report on current conditions'
 	            )
 	          ),
 	          this.state.canPost ? _react2.default.createElement(_Post2.default, null) : null,
-	          this.state.forecast ? _react2.default.createElement(_Sadie2.default, null) : null,
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'full-bar big-button' },
 	            _react2.default.createElement(
-	              'h3',
+	              'h5',
 	              null,
 	              'about this project'
 	            )
@@ -29189,6 +29190,10 @@
 	var _axios = __webpack_require__(267);
 	
 	var _axios2 = _interopRequireDefault(_axios);
+	
+	var _store = __webpack_require__(255);
+	
+	var _store2 = _interopRequireDefault(_store);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29227,16 +29232,36 @@
 	        'div',
 	        { className: 'post-box half-bar' },
 	        _react2.default.createElement(
+	          'div',
+	          { id: 'describe' },
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            _react2.default.createElement(
+	              'u',
+	              { id: 'how-to' },
+	              'what is \xA0\xA0\xA0\xA0\xA0\xA0 \'human weather\''
+	            )
+	          ),
+	          _react2.default.createElement('p', null),
+	          'to use human weather please enter a latitude and longitude along with a message',
+	          _react2.default.createElement('p', null),
+	          'lat is described in degrees and can be any number between -90 to 90. ',
+	          _react2.default.createElement('br', null),
+	          'long is described in degrees and can be any number between -180 and 180. ',
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement('p', null),
+	          'for example: the south pole is roughly \'-90, -146\' ',
+	          _react2.default.createElement('br', null),
+	          'new york city is at \'40.7128, -74.0059\''
+	        ),
+	        _react2.default.createElement(
 	          'form',
 	          { onSubmit: this.handleSubmit },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'form-group' },
-	            _react2.default.createElement('input', { type: 'text', placeholder: 'lat, long', name: 'coords' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group' },
+	            _react2.default.createElement('input', { className: 'coord-input', type: 'text', placeholder: 'lat, long', name: 'coords' }),
 	            _react2.default.createElement('input', { type: 'text', placeholder: 'what is it like there', name: 'msg' })
 	          ),
 	          _react2.default.createElement(
@@ -29268,7 +29293,7 @@
 	
 	  _axios2.default.post('/turn/markers', pack).then(function (newMarker) {
 	    console.log('nice, put a new marker into db', newMarker);
-	    store.dispatch(postToMap(newMarker.data));
+	    _store2.default.dispatch(postToMap(newMarker.data));
 	  });
 	};
 	

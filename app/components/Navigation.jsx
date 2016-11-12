@@ -24,6 +24,8 @@ export default class Navigation extends Component {
   render() {
     return (
       <div>
+        
+        {this.state.forecast? <Sadie /> : null}
 
         <div type='text' id='globe-pos' data-position='' className='top-container' ref='hello' value=''></div>
         <input className='top-input'></input>
@@ -31,17 +33,16 @@ export default class Navigation extends Component {
 
         <div className='bottom-container'>
           <div className='left-bar half-bar big-button' onClick={this.toggleForecast}>
-            <h2>forecast</h2>
+            <h5>forecast</h5>
           </div>
           <div className='right-bar half-bar big-button' onClick={this.togglePost}>
-            <h2>would you like to report on current conditions</h2>
+            <h5>would you like to report on current conditions</h5>
           </div>
 
           {this.state.canPost? <Post /> : null}
-          {this.state.forecast? <Sadie /> : null}
 
           <div className='full-bar big-button'>
-            <h3>about this project</h3>
+            <h5>about this project</h5>
           </div>
         </div>
 

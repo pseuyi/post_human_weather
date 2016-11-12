@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-
+import store from '../store'
 
 export default class Post extends Component {
   constructor(props) {
@@ -20,11 +20,23 @@ export default class Post extends Component {
   render() {
     return (
       <div className='post-box half-bar'>
+        <div id='describe'>
+        <p>
+          <u id='how-to'>what is &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'human weather'
+          </u>
+        </p>
+        <p></p>
+        to use human weather please enter a latitude and longitude along with a message
+        <p></p>
+        lat is described in degrees and can be any number between -90 to 90. <br/>
+        long is described in degrees and can be any number between -180 and 180. <br/>
+        <p></p>
+        for example: the south pole is roughly '-90, -146' <br/>
+        new york city is at '40.7128, -74.0059'
+        </div>
         <form onSubmit={this.handleSubmit}>
           <div className='form-group'>
-            <input type="text" placeholder="lat, long" name="coords" />
-          </div>
-          <div className='form-group'>
+            <input className='coord-input' type="text" placeholder="lat, long" name="coords" />
             <input type="text" placeholder="what is it like there" name="msg" />
           </div>
           <button type='submit' value='report'>report</button>

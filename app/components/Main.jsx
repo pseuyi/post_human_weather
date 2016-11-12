@@ -36,15 +36,17 @@ export default class Main extends Component {
 
         {
           markers && markers.map(marker=>{
-            map(marker[0],marker[1])
-        })
-      }
+            map(marker[0],marker[1], '/image/sun.png')
+          })
+        }
+         <ReactAudioPlayer src="/audio/final-exam.mp3" autoPlay/>
       </div>
     )
   }
 }
 
-// <ReactAudioPlayer
-//   src="/audio/final-exam.mp3"
-//   autoPlay
-// />
+
+//  <ReactAudioPlayer
+  //  src="/audio/final-exam.mp3"
+    //autoPlay
+  ///>
