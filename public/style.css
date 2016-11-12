@@ -1,3 +1,8 @@
+@font-face { 
+  font-family: BodoniXT; 
+  src: url('BodoniXT.ttf'); 
+} 
+
 .marquee {
   position: fixed;
   width: 100%;
@@ -65,7 +70,7 @@ body {
 /*	font-family: 'consolas', 'monaco', fixed-width;
 */
 /*  padding-top: 100px;*/
-  font-family: 'times new roman';
+  font-family: BodoniXT;
 }
 
 #app {
