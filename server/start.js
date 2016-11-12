@@ -4,6 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const {resolve} = require('path')
 const passport = require('passport')
+const cors = require('cors')
 
 // Bones has a symlink from node_modules/APP to the root of the app.
 // That means that we can require paths relative to the app root by
@@ -19,11 +20,14 @@ if (!pkg.isProduction) {
   app.use(require('volleyball'))
 }  
 
+
 module.exports = app
   // for bypassing restriction for map tiles
-  // .use(function(req, res) {
+  // .use(function(req, res, next) {
   //     res.header("Access-Control-Allow-Origin", "*");
   // })
+  .use(cors())
+
   // We'll store the whole session in a cookie
   .use(require('cookie-session') ({
     name: 'session',
@@ -37,7 +41,6 @@ module.exports = app
   // Authentication middleware
   .use(passport.initialize())
   .use(passport.session())
-  
   // Serve static files from ../public
   .use(express.static(resolve(__dirname, '..', 'public')))
 
@@ -45,7 +48,7 @@ module.exports = app
   .use('/api', require('./api'))
 
   // Serve pages
-  .use('/routes', require('./routes'))
+  .use('/turn', require('./routes'))
 
   // Send index.html for anything else.
   .get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html')))

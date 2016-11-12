@@ -1,16 +1,16 @@
 .marquee {
   position: fixed;
   width: 100%;
-  line-height: 3em;
+  line-height: 10px;
   font-size: 3em;
-  color: white;
+  color: black;
   white-space: nowrap;
   overflow: hidden;
-  z-index: -1;
+  z-index: -100;
   font-family: 'times new roman';
 }
 .marquee p {
-  margin-top: 15em;
+  margin-top: 0em;
   display: inline-block;
   padding-left: 100%;
   animation: marquee 60s linear infinite;
@@ -60,11 +60,12 @@
     100% { transform: translate(-100%, 0); }
 }
 
-
 body {
-	background-color: black;
-	font-family: 'consolas', 'monaco', fixed-width;
-  padding-top: 100px
+	background-color: white;
+/*	font-family: 'consolas', 'monaco', fixed-width;
+*/
+/*  padding-top: 100px;*/
+  font-family: 'times new roman';
 }
 
 #app {
@@ -73,11 +74,17 @@ body {
 	/*width: 200px;*/
 }
 
-#earth_div {
+#my_earth {
 	top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;
 	width: 100%;
 	height: 100%;
 	z-index: 5;
+}
+#my_moon {
+  top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;
+  width: 30%;
+  height: 30%;
+  z-index: 50;
 }
 
 audio {
@@ -85,12 +92,12 @@ audio {
 }
 
 h1 {
-	font-size: 10em;
+	font-size: 3em;
 }
 
 .top-container {
   color: red;
-  font-size: 4em;
+  font-size: 2em;
 	background: transparent;
 	position: fixed;
   top: 0;
@@ -101,11 +108,13 @@ h1 {
   text-align: center;
   display: block;
 }
+
+/* top input is an empty input for style that also creates a header border, display as block to see*/
 .top-input {
   color: white;
-  font-size: 4em;
+  font-size: 1em;
   background: transparent;
-  display: block;
+  display: none;
   position: fixed;
   top: 0;
   width: 100%;
@@ -116,6 +125,7 @@ h1 {
 }
 
 .lower-right-input {
+  display: none;
   position: absolute;
   right: 0.5%;
   top: 75%;
@@ -155,18 +165,20 @@ h1 {
   float: right;
 }
 .half-bar {
-	background: #822de2;
-  color: white;
+	background: rgba(240, 240, 240, 0.8);
+  color: black;
   width: calc(50% - 1px);
-  font-size: 1em;
-  padding: 1% 0;
-}
-.half-bar:hover{
-  background: transparent;
+  font-size: 0.9em;
+  padding: 0;
+  /*purple #822de2*/
 }
 .full-bar {
-	background: black;
-  color: white;
+/*  background: rgba(80, 19, 194, 0.80);*/
+    background: -webkit-linear-gradient(left, rgba(255,0,0,0), rgba(80, 19, 194, 0.80)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, rgba(255,0,0,0), rgba(80, 19, 194, 0.80)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, rgba(255,0,0,0), rgba(80, 19, 194, 0.80)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, rgba(255,0,0,0), rgba(80, 19, 194, 0.80)); /* Standard syntax (must be last) */
+  color: black;
   width: 100%;
   font-size: 1em;
   text-align: center;
@@ -174,17 +186,57 @@ h1 {
   margin-top: 2px;
   display: inline-block;
 }
-.full-bar:hover {
-  background: red;
+.left-bar:hover, .right-bar:hover, .full-bar:hover{
+  background: rgba(220, 220, 220, 1);
+}
+/*.video-bg {
+  position: fixed; 
+  z-index: -99; 
+  width: 1000px; 
+  height: 1000px;
+  frameborder="0";
+}*/
+
+.post-box {
+  padding: 1% 0;
+  position: absolute;
+  font-size: 2em;
+  color: white;
+  float: right;
+  height: auto;
+  background-color: rgba(256, 256, 256, 0.80);
+  border: 1px solid white;
+  border-radius: 50%;
+  right: 200px;
+  bottom: 576px;
+  margin-bottom: 2px;
+  text-align: center;
+  z-index: 50;
+  -webkit-transform: skewX(-20deg);
+  transform: skewX(-20deg);
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 150px;
+  height: 100px;
+}
+.coord-input {
+  margin-right: 2em;
+}
+#describe {
+  color: black;
+  text-align: center;
+  font-size: 14px;
+  margin-left: 1em;
+}
+#describe #how-to {
+  font-size: 18px;
+  font-family: serif;
 }
 
-
-
-
-
-
-
-
+.cesium-credit-textContainer:before {
+  display: none !important;
+}
 
 
 

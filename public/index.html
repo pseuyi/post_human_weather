@@ -5,27 +5,66 @@
     <link rel='clouds' href='favicon.ico' type='image/x-icon'/ >
 
     <script src="http://www.webglearth.com/v2/api.js"></script>
-    <script id='globe' data-position=''>
-      var earth;
+    <script id='globe'>
+
+      var earth='hi im earth';
+
+      function createMarker(location, message, img) {
+        var marker = WE.marker(location, img, 25, 25).addTo(earth);
+        marker.bindPopup(message, {maxWidth: 100, closeButton: true}).closePopup();
+      }
+
       function initialize() {
-        earth = new WE.map('my_earth');
+
+// EARTH //
+        var options = {
+          sky: false,
+          atmosphere: false,
+          dragging: true,
+          tilting: true,
+          zooming: true,
+          center: [46.8011, 8.2266],
+          zoom: 4
+        };
+
+        earth = new WE.map('my_earth', options);
         earth.setView([46.8011, 8.2266], 3);
-        WE.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{
+        earth.crossOrigin = '';
+        var layer = WE.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{
           attribution: '© u later'
-        }).addTo(earth);
-
-        var marker = WE.marker([51.5, -0.09]).addTo(earth);
-        marker.bindPopup("<b>Hello world!</b><br>I am a popup.<br /><span style='font-size:10px;color:#999'>Tip: Another popup is hidden in Cairo..</span>", {maxWidth: 100, closeButton: true}).openPopup();
-
+        })
+        layer.crossOrigin ='';
+        layer.addTo(earth);
         // Start a simple rotation animation
         var before = null;
         requestAnimationFrame(function animate(now) {
             var c = earth.getPosition();
+            // position dynamically added to dom elem
             document.getElementById('globe-pos').innerHTML = c || 0;
             var elapsed = before? now - before: 0;
             before = now;
-            earth.setCenter([c[0], c[1] - 0.1*(elapsed/360)]);
+            earth.setCenter([c[0], c[1] - 0.1*(elapsed/180)]);
             requestAnimationFrame(animate);
+        });
+
+
+// MOON //
+        moon = new WE.map('my_moon');
+        moon.setView([46.8011, 8.2266], 1);
+        moon.crossOrigin = '';
+        var layer = WE.tileLayer('http://localhost:1337/image/moon/tx_{x}_{y}.png',{
+          attribution: ''
+        })
+        layer.addTo(moon);
+
+        // animated moon
+        var beforeM = null;
+        requestAnimationFrame(function animate(now) {
+        var c = moon.getPosition();
+        var elapsed = beforeM? now - beforeM: 0;
+        beforeM = now;
+        moon.setCenter([c[0], c[1] - 0.1*(elapsed/1)]);
+        requestAnimationFrame(animate);
         });
         
       }
@@ -34,9 +73,11 @@
 
   </head>
 
-  <body onload="initialize()">
+  <body>
+
     <div id='app'></div>
     <div id="my_earth"></div>
+    <div id="my_moon"></div>
 
     <script async defer src=/bundle.js></script> 
   </body>
