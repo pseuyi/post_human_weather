@@ -11,3 +11,5 @@ you can:
 * look at forecasts
 * post to the earth
 * explore earthly feels
+
+[![screenshot](https://github.com/fredanada/human-weather/tree/master/public/image/screenshot.png)]
