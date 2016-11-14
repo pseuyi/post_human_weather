@@ -12,4 +12,4 @@ you can:
 * post to the earth
 * explore earthly feels
 
-[![solarized dualmode](https://github.com/fredanada/human-weather/raw/master/public/image/screenshot.png)]
+[![screenshot](https://github.com/fredanada/human-weather/tree/master/public/image/screenshot.png)]
