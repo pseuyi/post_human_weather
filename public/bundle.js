@@ -28049,7 +28049,8 @@
 	var _redux = __webpack_require__(179);
 	
 	var initialState = {
-	  markers: [[[51.5, -0.09], 'hello, world']]
+	  markers: [[[51.5, -0.09], 'hello, world', 'image/emoji/fear.png']],
+	  play: true
 	};
 	
 	var rootReducer = function rootReducer() {
@@ -28061,6 +28062,8 @@
 	      return Object.assign({}, state, { markers: state.markers.concat(action.markers) });
 	    case 'POST_TO_MAP':
 	      return Object.assign({}, state, { markers: state.markers.concat(action.newMarker) });
+	    case 'TOGGLE_MUSIC':
+	      return Object.assign({}, state, { play: !state.play });
 	    default:
 	      return state;
 	  }
@@ -29005,14 +29008,28 @@
 	    markers: markers
 	  };
 	};
+	var toggleMusic = function toggleMusic() {
+	  return {
+	    type: 'TOGGLE_MUSIC'
+	  };
+	};
 	
 	var Main = function (_Component) {
 	  _inherits(Main, _Component);
 	
-	  function Main() {
+	  function Main(props) {
 	    _classCallCheck(this, Main);
 	
-	    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
+	
+	    _this.getLocation = _this.getLocation.bind(_this);
+	    _this.state = {
+	      playing: true,
+	      curr: 46
+	    };
+	    _this.getLocation = _this.getLocation.bind(_this);
+	    _this.toggleMusic = _this.toggleMusic.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(Main, [{
@@ -29023,39 +29040,50 @@
 	        // very annoying: markers.data gives markers array of objects that have coords, msg properties
 	        var formattedMarkers = [];
 	        markers.data.map(function (markObj) {
-	          formattedMarkers.push([markObj.coords, markObj.msg]);
+	          formattedMarkers.push([markObj.coords, markObj.msg, markObj.img]);
 	        });
 	        console.log('trying to format markers.data', formattedMarkers);
 	        _store2.default.dispatch(putMarkersOnState(formattedMarkers));
 	      });
 	    }
 	  }, {
+	    key: 'getLocation',
+	    value: function getLocation(e) {
+	      var current = e.target.dataset.position;
+	      console.log('current moon position', +current[0] + current[1]);
+	      var pos = +current[0] + current[1];
+	      if (this.state.curr == 46) return;else if (this.state.curr != 46 && this.state.curr < 80 && pos > 80) this.toggleMusic(true);else if (this.state.curr > 80 && pos < 80) this.toggleMusic(false);
+	      this.setState({ curr: pos });
+	    }
+	  }, {
+	    key: 'toggleMusic',
+	    value: function toggleMusic(prop) {
+	      this.setState({ playing: prop });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log('what are the marker props on the main component?', this.props.markers.markers);
+	      // console.log('what are the marker props on the main component?', this.props.markers.markers)
+	      console.log('what is the state?', this.state.playing);
 	      var markers = this.props.markers.markers;
 	      var map = this.props.createMarker;
+	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(_Navigation2.default, null),
+	        _react2.default.createElement('div', { id: 'moon-pos', 'data-position': '', ref: 'location', value: '', onMouseMove: this.getLocation }),
 	        this.props.children,
 	        markers && markers.map(function (marker) {
-	          map(marker[0], marker[1], '/image/sun.png');
+	          map(marker[0], marker[1], marker[2]);
 	        }),
-	        _react2.default.createElement(_reactAudioPlayer2.default, { src: '/audio/final-exam.mp3', autoPlay: true })
+	        this.state.playing ? _react2.default.createElement(_reactAudioPlayer2.default, { src: '/audio/final-exam.mp3', autoPlay: true }) : _react2.default.createElement(_reactAudioPlayer2.default, { src: '/audio/xombies.mp3', autoPlay: true })
 	      );
 	    }
 	  }]);
 	
 	  return Main;
 	}(_react.Component);
-	
-	//  <ReactAudioPlayer
-	//  src="/audio/final-exam.mp3"
-	//autoPlay
-	///>
-	
 	
 	exports.default = Main;
 
@@ -29211,18 +29239,28 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this, props));
 	
+	    _this.state = {
+	      new: false
+	    };
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(Post, [{
+	    key: 'compononentDidMount',
+	    value: function compononentDidMount() {
+	      this.setState({ new: false });
+	    }
+	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit(e) {
 	      e.preventDefault();
 	      var pack = {
 	        coords: JSON.parse("[" + e.target.coords.value + "]"),
-	        msg: e.target.msg.value
+	        msg: e.target.msg.value,
+	        img: e.target.cond.value
 	      };
+	      this.setState({ new: true });
 	      packToDb(pack);
 	    }
 	  }, {
@@ -29230,44 +29268,139 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'post-box half-bar' },
+	        null,
+	        this.state.new ? _react2.default.createElement(
+	          'div',
+	          { className: 'new-msg' },
+	          'MeSSAGe SeNT'
+	        ) : null,
 	        _react2.default.createElement(
 	          'div',
-	          { id: 'describe' },
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            _react2.default.createElement(
-	              'u',
-	              { id: 'how-to' },
-	              'what is \xA0\xA0\xA0\xA0\xA0\xA0 \'human weather\''
-	            )
-	          ),
-	          _react2.default.createElement('p', null),
-	          'to use human weather please enter a latitude and longitude along with a message',
-	          _react2.default.createElement('p', null),
-	          'lat is described in degrees and can be any number between -90 to 90. ',
-	          _react2.default.createElement('br', null),
-	          'long is described in degrees and can be any number between -180 and 180. ',
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement('p', null),
-	          'for example: the south pole is roughly \'-90, -146\' ',
-	          _react2.default.createElement('br', null),
-	          'new york city is at \'40.7128, -74.0059\''
-	        ),
-	        _react2.default.createElement(
-	          'form',
-	          { onSubmit: this.handleSubmit },
+	          { className: 'post-box half-bar' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'form-group' },
-	            _react2.default.createElement('input', { className: 'coord-input', type: 'text', placeholder: 'lat, long', name: 'coords' }),
-	            _react2.default.createElement('input', { type: 'text', placeholder: 'what is it like there', name: 'msg' })
+	            { id: 'describe' },
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              _react2.default.createElement(
+	                'u',
+	                { id: 'how-to' },
+	                'what is \xA0\xA0\xA0\xA0\xA0\xA0 \'human weather\''
+	              )
+	            ),
+	            _react2.default.createElement('p', null),
+	            'to use human weather please enter a latitude and longitude separated by a comma and select a condition type along with an optional message',
+	            _react2.default.createElement('p', null),
+	            'lat is described in degrees and can be any number between -90 to 90. ',
+	            _react2.default.createElement('br', null),
+	            'lng is described in degrees and can be any number between -180 and 180. ',
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement('p', null),
+	            'for example: the south pole is roughly \'-90, -146\' ',
+	            _react2.default.createElement('br', null),
+	            'new york city is at \'40.7128, -74.0059\''
 	          ),
 	          _react2.default.createElement(
-	            'button',
-	            { type: 'submit', value: 'report' },
-	            'report'
+	            'form',
+	            { onSubmit: this.handleSubmit },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-group' },
+	              _react2.default.createElement('input', { className: 'coord-input', type: 'text', placeholder: 'lat, lng', name: 'coords' }),
+	              _react2.default.createElement('input', { type: 'text', placeholder: 'what is it like there', name: 'msg' }),
+	              ' ',
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement(
+	                'select',
+	                { name: 'cond' },
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/emoji/hot.png' },
+	                  'hot'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/emoji/cold.png' },
+	                  'cold'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/emoji/sunny.png' },
+	                  'sunny'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/emoji/cloudy.png' },
+	                  'cloudy'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/emoji/rainy.png' },
+	                  'rainy'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/emoji/snowy.png' },
+	                  'snowy'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/emoji/breezy.png' },
+	                  'breezy'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/emoji/foggy.png' },
+	                  'foggy'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/emoji/thunderstorm.png' },
+	                  'thunderstorm'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/emoji/tornado.png' },
+	                  'tornado/hurricane'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/hug.png' },
+	                  'it\'s all good'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/heart.png' },
+	                  'luv'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/emoji/cat.png' },
+	                  'meow'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/emoji/so-so.png' },
+	                  'so-so'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/emoji/crap.png' },
+	                  'feel like crap'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  { value: '/image/emoji/fear.png' },
+	                  'shocked and afraid'
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { type: 'submit', value: 'report' },
+	              'report'
+	            )
 	          )
 	        )
 	      );
@@ -29284,6 +29417,7 @@
 	  // receive the pack with marker data from a form in Post compononent
 	  var coords = pack[0];
 	  var msg = pack[1];
+	  var img = pack[2];
 	  console.log('packed up the new post', pack);
 	  saveNewMarker(pack);
 	};
@@ -30868,6 +31002,24 @@
 	            'p',
 	            null,
 	            'Xenofeminism is gender-abolitionist. \'Gender abolitionism\' is not code for the eradication of what are currently considered \'gendered\' traits from the human population. Under patriarchy, such a project could only spell disaster\u2013the notion of what is \'gendered\' sticks disproportionately to the feminine. But even if this balance were redressed, we have no interest in seeing the sexuate diversity of the world reduced. Let a hundred sexes bloom! \'Gender abolitionism\' is shorthand for the ambition to construct a society where traits currently assembled under the rubric of gender, no longer furnish a grid for the asymmetric operation of power. \'Race abolitionism\' expands into a similar formula\u2013that the struggle must continue until currently racialized characteristics are no more a basis of discrimination than than the color of one\'s eyes. Ultimately, every emancipatory abolitionism must incline towards the horizon of class abolitionism, since it is in capitalism where we encounter oppression in its transparent, denaturalized form: you\'re not exploited or oppressed because you are a wage labourer or poor; you are a labourer or poor because you are exploited.'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'marquee marquee5' },
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'The radical opportunities afforded by developing (and alienating) forms of technological mediation should no longer be put to use in the exclusive interests of capital, which, by design, only benefits the few. There are incessantly proliferating tools to be annexed, and although no one can claim their comprehensive accessibility, digital tools have never been more widely available or more sensitive to appropriation than they are today. This is not an elision of the fact that a large amount of the world\'s poor is adversely affected by the expanding technological industry (from factory workers labouring under abominable conditions to the Ghanaian villages that have become a repository for the e-waste of the global powers) but an explicit acknowledgement of these conditions as a target for elimination. Just as the invention of the stock market was also the invention of the crash, Xenofeminism knows that technological innovation must equally anticipate its systemic condition responsively.'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'marquee marquee6' },
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'From the street to the home, domestic space too must not escape our tentacles. So profoundly ingrained, domestic space has been deemed impossible to disembed, where the home as norm has been conflated with home as fact, as an un-remakeable given. Stultifying \'domestic realism\' has no home on our horizon. Let us set sights on augmented homes of shared laboratories, of communal media and technical facilities. The home is ripe for spatial transformation as an integral component in any process of feminist futurity. But this cannot stop at the garden gates. We see too well that reinventions of family structure and domestic life are currently only possible at the cost of either withdrawing from the economic sphere\u2013the way of the commune\u2013or bearing its burdens manyfold\u2013the way of the single parent. If we want to break the inertia that has kept the moribund figure of the nuclear family unit in place, which has stubbornly worked to isolate women from the public sphere, and men from the lives of their children, while penalizing those who stray from it, we must overhaul the material infrastructure and break the economic cycles that lock it in place.'
 	          )
 	        )
 	      );

@@ -1,8 +1,11 @@
 @font-face { 
   font-family: BodoniXT; 
+  font-weight: regular;
   src: url('BodoniXT.ttf'); 
 } 
-
+h5 {
+  margin: 1em;
+}
 .marquee {
   position: fixed;
   width: 100%;
@@ -15,31 +18,43 @@
   font-family: 'times new roman';
 }
 .marquee p {
-  margin-top: 0em;
+  margin-top: 1em;
   display: inline-block;
   padding-left: 100%;
   animation: marquee 60s linear infinite;
 }
 .marquee1 p {
-  margin-top: 3em;
+  margin-top: 4em;
   display: inline-block;
   padding-left: 100%;
   animation: marquee 63s linear infinite;
 }
 .marquee2 p {
-  margin-top: 6em;
+  margin-top: 7em;
   display: inline-block;
   padding-left: 100%;
   animation: marquee 61s linear infinite;
 }
 .marquee3 p {
-  margin-top: 9em;
+  margin-top: 10em;
   display: inline-block;
   padding-left: 100%;
   animation: marquee 66s linear infinite;
 }
 .marquee4 p {
-  margin-top: 12em;
+  margin-top: 13em;
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 65s linear infinite;
+}
+.marquee5 p {
+  margin-top: 16em;
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 65s linear infinite;
+}
+.marquee6 p {
+  margin-top: 19em;
   display: inline-block;
   padding-left: 100%;
   animation: marquee 65s linear infinite;
@@ -64,6 +79,14 @@
     0%   { transform: translate(0, 0); }
     100% { transform: translate(-100%, 0); }
 }
+@keyframes marquee5 {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+@keyframes marquee6 {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
 
 body {
 	background-color: white;
@@ -84,25 +107,31 @@ body {
 	width: 100%;
 	height: 100%;
 	z-index: 5;
+
 }
 #my_moon {
   top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;
   width: 30%;
   height: 30%;
   z-index: 50;
+  background: transparent;
+
+}
+#moon-pos {
+  top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;
+  width: 33%;
+  height: 33%;
+  z-index: 45;
 }
 
 audio {
 	display: none;
 }
 
-h1 {
-	font-size: 3em;
-}
-
 .top-container {
   color: red;
-  font-size: 2em;
+  font-family: 'consolas', monospace;
+  font-size: 1em;
 	background: transparent;
 	position: fixed;
   top: 0;
@@ -173,7 +202,7 @@ h1 {
 	background: rgba(240, 240, 240, 0.8);
   color: black;
   width: calc(50% - 1px);
-  font-size: 0.9em;
+  font-size: 1em;
   padding: 0;
   /*purple #822de2*/
 }
@@ -187,7 +216,7 @@ h1 {
   width: 100%;
   font-size: 1em;
   text-align: center;
-  padding: 1% 0;
+  padding: 0 0;
   margin-top: 2px;
   display: inline-block;
 }
@@ -203,7 +232,7 @@ h1 {
 }*/
 
 .post-box {
-  padding: 1% 0;
+  padding: 1% 1%;
   position: absolute;
   font-size: 2em;
   color: white;
@@ -211,9 +240,9 @@ h1 {
   height: auto;
   background-color: rgba(256, 256, 256, 0.80);
   border: 1px solid white;
-  border-radius: 50%;
-  right: 200px;
-  bottom: 576px;
+  border-radius: 0;
+  right: 220px;
+  bottom: 100px;
   margin-bottom: 2px;
   text-align: center;
   z-index: 50;
@@ -223,7 +252,7 @@ h1 {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
   width: 150px;
-  height: 100px;
+  height: auto;
 }
 .coord-input {
   margin-right: 2em;
@@ -236,12 +265,32 @@ h1 {
 }
 #describe #how-to {
   font-size: 18px;
-  font-family: serif;
+}
+.new-msg {
+  margin: 0;
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 330px;
+  font-size: 7em;
+  font-family: BodoniXT;
+  text-align: center;
+    -ms-transform: scale(1, 3); /* IE 9 */
+  -webkit-transform: scale(1, 3); /* Safari */
+    transform: scale(1, 3);
+  color: black;
+  z-index: 100;
+}
+h1 {
+  padding: 0;
 }
 
 .cesium-credit-textContainer:before {
   display: none !important;
 }
 
+.we-pp-wrapper {
+  background: rgba(240, 240, 240, 0.8) !important;
+}
 
 

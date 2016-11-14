@@ -11,7 +11,7 @@
 
       function createMarker(location, message, img) {
         var marker = WE.marker(location, img, 25, 25).addTo(earth);
-        marker.bindPopup(message, {maxWidth: 100, closeButton: true}).closePopup();
+        marker.bindPopup(message, {maxWidth: 100, closeButton: false}).closePopup();
       }
 
       function initialize() {
@@ -23,12 +23,12 @@
           dragging: true,
           tilting: true,
           zooming: true,
-          center: [46.8011, 8.2266],
+          center: [40.7128, -74.0059],
           zoom: 4
         };
 
         earth = new WE.map('my_earth', options);
-        earth.setView([46.8011, 8.2266], 3);
+        earth.setView([40.7128, -74.0059], 3);
         earth.crossOrigin = '';
         var layer = WE.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{
           attribution: '© u later'
@@ -43,14 +43,14 @@
             document.getElementById('globe-pos').innerHTML = c || 0;
             var elapsed = before? now - before: 0;
             before = now;
-            earth.setCenter([c[0], c[1] - 0.1*(elapsed/180)]);
+            earth.setCenter([c[0], c[1] - 0.1*(elapsed/360)]);
             requestAnimationFrame(animate);
         });
 
 
 // MOON //
         moon = new WE.map('my_moon');
-        moon.setView([46.8011, 8.2266], 1);
+        moon.setView([46.8011, 8.2266], 0.5);
         moon.crossOrigin = '';
         var layer = WE.tileLayer('http://localhost:1337/image/moon/tx_{x}_{y}.png',{
           attribution: ''
@@ -61,9 +61,10 @@
         var beforeM = null;
         requestAnimationFrame(function animate(now) {
         var c = moon.getPosition();
+        document.getElementById('moon-pos').dataset.position = c || 0;
         var elapsed = beforeM? now - beforeM: 0;
         beforeM = now;
-        moon.setCenter([c[0], c[1] - 0.1*(elapsed/1)]);
+        moon.setCenter([c[0], c[1] + 0.1*(elapsed/1)]);
         requestAnimationFrame(animate);
         });
         
