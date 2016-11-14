@@ -11,3 +11,5 @@ you can:
 * look at forecasts
 * post to the earth
 * explore earthly feels
+
+[![solarized dualmode](https://github.com/fredanada/human-weather/raw/master/public/image/screenshot.png)]
