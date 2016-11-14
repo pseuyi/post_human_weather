@@ -12,4 +12,12 @@ you can:
 * post to the earth
 * explore earthly feels
 
+### quick start
+
+```
+npm install
+npm run build-watch
+npm start
+```
+
 ![screenshot](https://github.com/fredanada/human-weather/raw/master/public/image/screenshot.png)
