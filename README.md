@@ -27,4 +27,4 @@ npm start
 
 ### screenshot
 
-![screenshot](https://github.com/fredanada/human-weather/raw/master/public/image/screenshot.png)
+![screenshot](https://github.com/fredanada/human-weather/raw/master/public/image/screenshot2.png)
