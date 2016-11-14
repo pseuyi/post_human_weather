@@ -21,9 +21,9 @@ npm start
 ```
 ### libraries
 
-[webgl earth](https://github.com/webglearth)
-[cors middleware](https://github.com/expressjs/cors)
-[react audio](https://github.com/justinmc/react-audio-player)
+* [webgl earth](https://github.com/webglearth)
+* [cors middleware](https://github.com/expressjs/cors)
+* [react audio](https://github.com/justinmc/react-audio-player)
 
 ### screenshot
 
