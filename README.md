@@ -2,8 +2,7 @@
 
 ### what does this do?
  
-human weather is an atmospheric s.p.a. that allows anonymous users to post emojional representations of climate in the age of the anthroposcene, of Human Weather
-
+human weather is an atmospheric s.p.a. that allows anonymous users to post emojional representations of climate in the anthroposcene
 ### inside
 
 you can:
