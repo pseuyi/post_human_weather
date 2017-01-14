@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel='clouds' href='favicon.ico' type='image/x-icon'/ >
+  
+    <script src="http://www.webglearth.com/v2/api.js"></script>
+
+    <script id='globe'>
+
+      var earth='hi im earth';
+
+      function createMarker(location, message, img) {
+        var marker = WE.marker(location, img, 25, 25).addTo(earth);
+        marker.bindPopup(message, {maxWidth: 100, closeButton: false}).closePopup();
+      }
+
+      function initialize() {
+
+// EARTH //
+        var options = {
+          sky: false,
+          atmosphere: false,
+          dragging: true,
+          tilting: true,
+          zooming: true,
+          center: [40.7128, -74.0059],
+          zoom: 4
+        };
+
+        earth = new WE.map('my_earth', options);
+        earth.setView([40.7128, -74.0059], 3);
+        earth.crossOrigin = '';
+        var layer = WE.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{
+          attribution: '© u later'
+        })
+        layer.crossOrigin ='';
+        layer.addTo(earth);
+        // Start a simple rotation animation
+        var before = null;
+        requestAnimationFrame(function animate(now) {
+            var c = earth.getPosition();
+            // position dynamically added to dom elem
+            document.getElementById('globe-pos').innerHTML = c || 0;
+            var elapsed = before? now - before: 0;
+            before = now;
+            earth.setCenter([c[0], c[1] - 0.1*(elapsed/360)]);
+            requestAnimationFrame(animate);
+        });
+
+
+// MOON //
+        moon = new WE.map('my_moon');
+        moon.setView([46.8011, 8.2266], 0.5);
+        moon.crossOrigin = '';
+        var layer = WE.tileLayer('http://localhost:1337/image/moon/tx_{x}_{y}.png',{
+          attribution: ''
+        })
+        layer.addTo(moon);
+
+        // animated moon
+        var beforeM = null;
+        requestAnimationFrame(function animate(now) {
+        var c = moon.getPosition();
+        document.getElementById('moon-pos').dataset.position = c || 0;
+        var elapsed = beforeM? now - beforeM: 0;
+        beforeM = now;
+        moon.setCenter([c[0], c[1] + 0.1*(elapsed/1)]);
+        requestAnimationFrame(animate);
+        });
+        
+      }
+    </script>
+    <title>human weather</title>
+
+  </head>
+
+  <body>
+
+    <div id='app'></div>
+    <div id="my_earth"></div>
+    <div id="my_moon"></div>
+
+    <div id="particles-js"></div>
+    <script src="particles.js"></script>
+    <script async defer src=/bundle.js></script> 
+  </body>
+
+</html>
