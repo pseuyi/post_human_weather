@@ -4,6 +4,7 @@ import {render} from 'react-dom'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import store from './store'
+import { particlesJS } from 'particles.js'
 
 // import components below
 import Main from './components/Main'

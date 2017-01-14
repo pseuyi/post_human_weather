@@ -1,7 +1,7 @@
 {
   "name": "hackathon",
   "version": "0.0.1",
-  "description": "A happy little skeleton.",
+  "description": "based on the happy little skeleton.",
   "main": "index.js",
   "scripts": {
     "test": "mocha app/**/*.test.js db/**/*.test.js server/**/*.test.js",
@@ -34,6 +34,7 @@
     "cors": "^2.8.1",
     "epilogue": "^0.7.0",
     "express": "^4.14.0",
+    "particles.js": "^2.0.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pg": "^6.1.0",
@@ -60,5 +61,8 @@
     "supertest-as-promised": "^4.0.1",
     "volleyball": "^1.4.1",
     "webpack": "^1.13.3"
+  },
+  "engines": {
+    "node": "7.0.0"
   }
 }
