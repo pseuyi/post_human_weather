@@ -1,7 +1,7 @@
 'use strict'
 const epilogue = require('epilogue')
 
-const db = require('APP/db')
+const db = require('../db')
 const api = require('express').Router()
 
 api
@@ -30,7 +30,7 @@ const selfOnly = action => (req, res, context) => {
     res.status(403).send(`You can only ${action} yourself.`)
     return context.stop
   }
-  return context.continue  
+  return context.continue
 }
 
 const forbidden = message => (req, res, context) => {

@@ -1,7 +1,7 @@
 const debug = require('debug')('auth')
 const passport = require('passport')
 
-const User = require('APP/db/models/user')
+const User = require('../db/models/user')
 
 const auth = require('express').Router()
 
@@ -38,11 +38,11 @@ passport.use(new (require('passport-local').Strategy) (
         return user.authenticate(password)
           .then(ok => {
             if (!ok) {
-              debug('authenticate user(email: "%s") did fail: bad password')              
+              debug('authenticate user(email: "%s") did fail: bad password')
               return done(null, false, { message: 'Login incorrect' })
             }
             debug('authenticate user(email: "%s") did ok: user.id=%d', user.id)
-            done(null, user)              
+            done(null, user)
           })
       })
       .catch(done)
@@ -58,4 +58,3 @@ auth.post('/:strategy/login', (req, res, next) =>
 )
 
 module.exports = auth
-

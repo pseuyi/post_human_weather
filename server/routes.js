@@ -1,6 +1,6 @@
 'use strict'
 
-const Marker = require('APP/db/models/marker')
+const Marker = require('../db/models/marker')
 
 const router = require('express').Router();
 
