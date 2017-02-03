@@ -8,23 +8,21 @@
     "test-watch": "mocha --watch app/**/*.test.js db/**/*.test.js server/**/*.test.js",
     "build": "webpack",
     "build-watch": "webpack -w",
-    "start": "nodemon server/start.js"
+    "start:dev": "nodemon server/start.js",
+    "start": "node server/start.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/queerviolet/bones.git"
+    "url": ""
   },
   "keywords": [
     "react",
     "redux",
     "skeleton"
   ],
-  "author": "Ashi Krishnan <me@ashi.works>",
+  "author": "freda nada",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/queerviolet/bones/issues"
-  },
-  "homepage": "https://github.com/queerviolet/bones#readme",
+  "homepage": "",
   "dependencies": {
     "axios": "^0.15.2",
     "bcrypt": "^0.8.7",
@@ -34,6 +32,7 @@
     "cors": "^2.8.1",
     "epilogue": "^0.7.0",
     "express": "^4.14.0",
+    "nodemon": "^1.11.0",
     "particles.js": "^2.0.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
